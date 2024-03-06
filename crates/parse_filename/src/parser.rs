@@ -5,7 +5,7 @@ use regex::Regex;
 use serde::{Deserialize, Serialize};
 
 fn read_media_stream() -> Result<ParserData, Box<dyn std::error::Error>> {
-    let file = std::fs::File::open("src/media_stream.json")?;
+    let file = std::fs::File::open("media_stream.json")?;
     let reader = std::io::BufReader::new(file);
     let media_stream: ParserData = serde_json::from_reader(reader)?;
     Ok(media_stream)
@@ -54,7 +54,7 @@ impl Parser {
     pub fn match_resolution(&self, filename: &str) -> Option<(String, String)> {
         let resolution = &self.config.resolution;
         for (k, v) in resolution {
-            let re = Regex::new(&k).unwrap();
+            let re = Regex::new(k).unwrap();
             if re.is_match(filename) {
                 return Some((k.to_string(), v.to_string()));
             }
@@ -66,7 +66,7 @@ impl Parser {
     pub fn match_encoding(&self, filename: &str) -> Option<(String, String)> {
         let media_codec = &self.config.media_codec;
         for (k, v) in media_codec {
-            let re = Regex::new(&k).unwrap();
+            let re = Regex::new(k).unwrap();
             if re.is_match(filename) {
                 return Some((k.to_string(), v.to_string()));
             }
@@ -78,7 +78,7 @@ impl Parser {
     pub fn match_release_team(&self, filename: &str) -> Option<(String, String)> {
         let release_team = &self.config.release_team;
         for (k, v) in release_team {
-            let re = Regex::new(&k).unwrap();
+            let re = Regex::new(k).unwrap();
             if re.is_match(filename) {
                 return Some((k.to_string(), v.to_string()));
             }
@@ -90,7 +90,7 @@ impl Parser {
     pub fn match_audio(&self, filename: &str) -> Option<(String, String)> {
         let media_audio = &self.config.media_audio;
         for (k, v) in media_audio {
-            let re = Regex::new(&k).unwrap();
+            let re = Regex::new(k).unwrap();
             if re.is_match(filename) {
                 return Some((k.to_string(), v.to_string()));
             }
