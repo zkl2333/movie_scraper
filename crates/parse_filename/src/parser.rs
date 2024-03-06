@@ -31,9 +31,11 @@ impl Parser {
     }
 
     // 解析年份
-    pub fn match_yaer(&self, filename: &str) -> Option<String> {
+    pub fn match_year(&self, filename: &str) -> Option<(String, String)> {
         let re_year = Regex::new(r"\d{4}").unwrap();
-        re_year.find(filename).map(|m| m.as_str().to_string())
+        re_year
+            .find(filename)
+            .map(|m| (m.as_str().to_string(), m.as_str().to_string()))
     }
 
     // 解析来源
@@ -99,14 +101,18 @@ impl Parser {
     }
 
     // 解析字幕
-    pub fn match_subtitle(&self, filename: &str) -> Option<String> {
+    pub fn match_subtitle(&self, filename: &str) -> Option<(String, String)> {
         let re_subtitle = Regex::new(r"(中英特效字幕|简繁中字)").unwrap();
-        re_subtitle.find(filename).map(|m| m.as_str().to_string())
+        re_subtitle
+            .find(filename)
+            .map(|m| (m.as_str().to_string(), m.as_str().to_string()))
     }
 
     // 解析深度
-    pub fn match_depth(&self, filename: &str) -> Option<String> {
+    pub fn match_depth(&self, filename: &str) -> Option<(String, String)> {
         let re_depth = Regex::new(r"10bit").unwrap();
-        re_depth.find(filename).map(|m| m.as_str().to_string())
+        re_depth
+            .find(filename)
+            .map(|m| (m.as_str().to_string(), m.as_str().to_string()))
     }
 }

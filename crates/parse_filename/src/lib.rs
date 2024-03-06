@@ -1,39 +1,32 @@
 mod parser;
 use crate::parser::Parser;
 
+macro_rules! match_parser {
+    ($parser:expr, $method:ident, $filename:expr) => {
+        $parser
+            .$method($filename)
+            .unwrap_or_else(|| ("".to_string(), "".to_string()))
+    };
+}
+
 pub fn parse_filename(filename: &str) {
     let parser = Parser::new();
 
-    let year = match &parser.match_yaer(filename) {
-        Some(v) => v.to_owned(),
-        None => "".to_string(),
-    };
-    let (source_match, source) = match &parser.match_source(filename) {
-        Some((k, v)) => (k.to_owned(), v.to_owned()),
-        None => ("".to_string(), "".to_string()),
-    };
-    let (resolution_match, resolution) = match &parser.match_resolution(filename) {
-        Some((k, v)) => (k.to_owned(), v.to_owned()),
-        None => ("".to_string(), "".to_string()),
-    };
-    let (encoding_match, encoding) = match &parser.match_encoding(filename) {
-        Some((k, v)) => (k.to_owned(), v.to_owned()),
-        None => ("".to_string(), "".to_string()),
-    };
-    let (release_team_match, release_team) = match &parser.match_release_team(filename) {
-        Some((k, v)) => (k.to_owned(), v.to_owned()),
-        None => ("".to_string(), "".to_string()),
-    };
-    let audio = parser.match_audio(filename);
-    let (audio_match, audio) = match &audio {
-        Some((k, v)) => (k.to_owned(), v.to_owned()),
-        None => ("".to_string(), "".to_string()),
-    };
-    let subtitle = parser.match_subtitle(filename);
-    let depth = parser.match_depth(filename);
+    let (year_match, year) = match_parser!(parser, match_year, filename);
+    let (source_match, source) = match_parser!(parser, match_source, filename);
+    let (resolution_match, resolution) = match_parser!(parser, match_resolution, filename);
+    let (encoding_match, encoding) = match_parser!(parser, match_encoding, filename);
+    let (release_team_match, release_team) = match_parser!(parser, match_release_team, filename);
+    let (audio_match, audio) = match_parser!(parser, match_audio, filename);
+    let (subtitle_match, subtitle) = match_parser!(parser, match_subtitle, filename);
+    let (depth_match, depth) = match_parser!(parser, match_depth, filename);
 
-    println!(
-        "filename: {}\nyear: {}\nsource: {}\nresolution: {}\nencoding: {}\nrelease_team: {}\naudio: {}\nsubtitle: {:?}\ndepth: {:?}\n",
-        filename, year, source, resolution, encoding, release_team, audio, subtitle, depth
-    );
+    println!("year: {} {}", year_match, year);
+    println!("source: {} {}", source_match, source);
+    println!("resolution: {} {}", resolution_match, resolution);
+    println!("encoding: {} {}", encoding_match, encoding);
+    println!("release_team: {} {}", release_team_match, release_team);
+    println!("audio: {} {}", audio_match, audio);
+    println!("subtitle: {} {}", subtitle_match, subtitle);
+    println!("depth: {} {}", depth_match, depth);
 }
