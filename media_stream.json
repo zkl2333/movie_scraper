@@ -25,6 +25,7 @@
     },
     "media_audio": {
         "AAC": "AAC",
+        "AC3": "AC3",
         "FLAC": "FLAC",
         "TRUEHD": "TrueHD5.1",
         "TRUEHD7.1": "TrueHD7.1",
@@ -35,11 +36,17 @@
         "DTS": "DTS",
         "DTSHD": "DTS-HD",
         "DTS-X": "DTS-X",
-        "DTSX": "DTS-X",
+        "DTSX": "DTS-X"
+    },
+    "media_audio_channel": {
         "2AUDIO": "2Audio",
+        "2AUDIOS": "2Audio",
         "3AUDIO": "3Audio",
+        "3AUDIOS": "3Audio",
         "4AUDIO": "4Audio",
-        "5AUDIO": "5Audio"
+        "4AUDIOS": "4Audio",
+        "5AUDIO": "5Audio",
+        "5AUDIOS": "5Audio"
     },
     "media_codec": {
         "HEVC": "HEVC",

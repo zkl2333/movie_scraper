@@ -5,7 +5,7 @@ fn main() {
         "网络迷踪.Searching.2018.BluRay.1080p.x265.10bit.MNHD-FRDS",
         "背靠背,脸对脸.1994.1080p.x265.国语.简繁中字￡CMCT",
         "自由的幻影.The.Phantom.of.Liberty.1974.Criterion.Collection.1080p.BluRay.x265.10bit.FLAC.MNHD-FRDS",
-        "芙蓉镇.Hibiscus.Town.1987.1080p.BluRay.x265.AC3￡cXcY\\@FRDS",
+        "芙蓉镇.Hibiscus.Town.1987.1080p.BluRay.x265.AC3￡cXcY@FRDS",
         "芬奇.2021.ATVP.1080p.中英特效字幕￡CMCT老男孩",
         "范海辛.Van.Helsing.2004.BluRay.1080p.x265.10bit.2Audio.MNHD-FRDS",
         "落水狗.Reservoir.Dogs.1992.BluRay.1080p.x265.10bit.MNHD-FRDS",
@@ -17,6 +17,7 @@ fn main() {
     ];
 
     for filename in filenames {
-        parse_filename::parse_filename(filename);
+        let media_info = parse_filename::parse_filename(filename);
+        println!("{:?}", media_info.unwrap());
     }
 }
